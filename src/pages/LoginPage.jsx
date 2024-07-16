@@ -43,7 +43,6 @@ const LoginCoba = () => {
             },
           }
         );
-        // console.log(userResponse.data);
 
         if (userResponse.data.role === "admin") {
           // If the user is an admin, store the token and navigate to the home page

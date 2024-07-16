@@ -6,7 +6,7 @@ export const GetProducts = async () => {
     const response = await axios.get(
       `${import.meta.env.VITE_BACKEND_URL}/show`
     );
-    // console.log("Fetched products:", response.data); // Log fetched data
+
     return response.data;
   } catch (error) {
     console.error("Error fetching products from API:", error); // Log any errors

@@ -32,7 +32,6 @@ const RiwayatPage = () => {
           (entry) => entry.status === "SELESAI"
         );
         setHistory(completedHistory);
-        console.log(completedHistory);
       } catch (error) {
         console.error("Error fetching history:", error);
       } finally {

@@ -62,7 +62,7 @@ const EditProductPage = () => {
           },
         }
       );
-      console.log("Success edit data");
+
       Swal.fire({
         title: "Success",
         text: "Berhasil Update",

@@ -30,8 +30,6 @@ const AddProductPage = () => {
     formData.append("harga", harga);
     formData.append("image", image);
 
-    // console.log("Form Data:", formData);
-
     try {
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}/add`, formData, {
         headers: {
@@ -39,7 +37,7 @@ const AddProductPage = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      // console.log("Success add data");
+
       Swal.fire({
         title: "Success",
         text: "Berhasil Menambahkan Data",
