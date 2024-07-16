@@ -1,7 +1,7 @@
 // src/components/Login.js
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LoginCoba = () => {
   const [showPassword, setShowPassword] = useState(false);
