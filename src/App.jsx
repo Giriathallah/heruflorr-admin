@@ -21,6 +21,7 @@ function App() {
       navigate("/login");
       return;
     }
+
     const fetchUser = async () => {
       try {
         const response = await axios.get(
@@ -32,17 +33,21 @@ function App() {
           }
         );
 
-        if (response.data.role != "admin") {
+        if (response.data.role !== "admin") {
           localStorage.removeItem("token");
           localStorage.removeItem("userId");
+          navigate("/login");
         }
-      } catch {
+      } catch (error) {
+        console.error("Error fetching user:", error);
         localStorage.removeItem("token");
         localStorage.removeItem("userId");
+        navigate("/login");
       }
     };
+
     fetchUser();
-  }, []);
+  }, [navigate, token, userId]);
 
   return (
     <div className="flex h-screen overflow-hidden">

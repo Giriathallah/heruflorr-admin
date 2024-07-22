@@ -34,7 +34,6 @@ const EditProductPage = () => {
           localStorage.removeItem("token");
           localStorage.removeItem("userId");
         }
-        console.log(response.data.role);
       } catch {
         localStorage.removeItem("token");
         localStorage.removeItem("userId");
@@ -57,7 +56,7 @@ const EditProductPage = () => {
       setJenis(response.data.jenis);
       // Ensure we are not setting the image from the fetched data
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 

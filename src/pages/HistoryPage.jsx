@@ -6,10 +6,9 @@ const RiwayatPage = () => {
   const [history, setHistory] = useState([]);
   // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (!token || !userId) {
@@ -30,7 +29,6 @@ const RiwayatPage = () => {
           localStorage.removeItem("token");
           localStorage.removeItem("userId");
         }
-        console.log(response.data.role);
       } catch {
         localStorage.removeItem("token");
         localStorage.removeItem("userId");

@@ -30,7 +30,6 @@ const TransaksiPage = () => {
           localStorage.removeItem("token");
           localStorage.removeItem("userId");
         }
-        console.log(response.data.role);
       } catch {
         localStorage.removeItem("token");
         localStorage.removeItem("userId");
