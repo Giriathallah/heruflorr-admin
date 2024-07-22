@@ -165,6 +165,8 @@ const LoginCoba = () => {
                     Email address
                   </label>
                   <input
+                    id="email-address"
+                    name="email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -179,6 +181,8 @@ const LoginCoba = () => {
                     Password
                   </label>
                   <input
+                    id="password"
+                    name="password"
                     type={showPassword ? "text" : "password"}
                     autoComplete="current-password"
                     value={password}
