@@ -11,14 +11,37 @@ const AddProductPage = () => {
   const [jenis, setJenis] = useState("tanaman kecil");
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
-  const token = localStorage.getItem("token");
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    if (!token) {
+    if (!token || !userId) {
       navigate("/login");
+      return;
     }
-  }, [token, navigate]);
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/user/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (response.data.role != "admin") {
+          localStorage.removeItem("token");
+          localStorage.removeItem("userId");
+        }
+        console.log(response.data.role);
+      } catch {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+      }
+    };
+    fetchUser();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

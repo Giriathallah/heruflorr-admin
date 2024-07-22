@@ -47,6 +47,7 @@ const LoginCoba = () => {
         if (userResponse.data.role === "admin") {
           // If the user is an admin, store the token and navigate to the home page
           localStorage.setItem("token", response.data.access_token);
+          localStorage.setItem("userId", response.data.userId);
           navigate("/");
         } else {
           setError("You do not have permission to access this page.");

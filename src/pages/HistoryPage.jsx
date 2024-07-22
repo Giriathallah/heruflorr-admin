@@ -7,14 +7,37 @@ const RiwayatPage = () => {
   // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsLoading] = useState(false);
   const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) {
+    if (!token || !userId) {
       navigate("/login");
+      return;
     }
-  }, [token, navigate]);
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/user/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (response.data.role != "admin") {
+          localStorage.removeItem("token");
+          localStorage.removeItem("userId");
+        }
+        console.log(response.data.role);
+      } catch {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+      }
+    };
+    fetchUser();
+  }, []);
 
   useEffect(() => {
     const fetchHistory = async () => {

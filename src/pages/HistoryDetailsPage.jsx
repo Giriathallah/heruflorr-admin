@@ -6,14 +6,37 @@ const HistoryDetails = () => {
   const { id } = useParams();
   const [details, setDetails] = useState(null);
   const [dataUser, setDataUser] = useState(null);
-  const token = localStorage.getItem("token");
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    if (!token) {
+    if (!token || !userId) {
       navigate("/login");
+      return;
     }
-  }, [token, navigate]);
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/user/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (response.data.role != "admin") {
+          localStorage.removeItem("token");
+          localStorage.removeItem("userId");
+        }
+        console.log(response.data.role);
+      } catch {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+      }
+    };
+    fetchUser();
+  }, []);
 
   useEffect(() => {
     const fetchDetails = async () => {

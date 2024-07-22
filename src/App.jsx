@@ -4,20 +4,44 @@ import SidebarComponent from "./components/Sidebar";
 import UserComponent from "./components/UserComponent";
 import NavbarComponent from "./components/Navbar";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
   useEffect(() => {
-    if (!token) {
+    if (!token || !userId) {
       navigate("/login");
+      return;
     }
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/user/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.data.role != "admin") {
+          localStorage.removeItem("token");
+          localStorage.removeItem("userId");
+        }
+      } catch {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+      }
+    };
+    fetchUser();
   }, []);
 
   return (
