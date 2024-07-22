@@ -19,6 +19,7 @@ const UserComponent = () => {
 
       // Clear the token from local storage
       localStorage.removeItem("token");
+      localStorage.removeItem("userId");
 
       // Show success alert
       Swal.fire({
