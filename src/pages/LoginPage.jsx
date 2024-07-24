@@ -262,24 +262,6 @@ const LoginCoba = () => {
                     Masuk
                   </button>
                 </div>
-                <div className="flex justify-between">
-                  <div>
-                    <a
-                      href="/register"
-                      className="font-medium text-lime-600 hover:text-lime-500"
-                    >
-                      Belum punya akun?
-                    </a>
-                  </div>
-                  <div>
-                    <a
-                      href="/forgot-password"
-                      className="font-medium text-lime-600 hover:text-lime-500"
-                    >
-                      Lupa password?
-                    </a>
-                  </div>
-                </div>
               </form>
             </div>
           </div>
